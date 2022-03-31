@@ -19,7 +19,11 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 - Colors
 - Descriptions, prereqs
 - Curriculum healthcheck
-
+- Degree 'offramps' after 1 year (term 4), 2 years (term 8)
+    - choose target from dropdown?
+- Versioning the course list in the saved urls (e.g. Woolf '21, FL '22, saved
+    as a byte, so that when the course list changes, the urls still work or
+    gracefully fail)
 
 ### Credits
 
