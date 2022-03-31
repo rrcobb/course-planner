@@ -1,0 +1,91 @@
+body {
+  --theory-color: green;
+  --skills-color: blue;
+  --technical-color: orange;
+  --practical-color: lightskyblue;
+}
+
+#target {
+  max-width: 900px;
+  margin: auto;
+  position: relative;
+}
+
+h1, h2 {
+  margin-bottom: 0;
+}
+
+.term h3 {
+  margin-bottom: 0;
+}
+
+.info {
+  margin-bottom: 0.5rem;
+}
+
+.courses {
+  border: 1px dotted black;
+  padding: 0.5rem;
+}
+
+.term .courses {
+  max-width: calc(100% - 300px);
+}
+
+.droptarget .courses {
+  background-color: honeydew;
+}
+
+/* hack so that dragging over child elements does not trigger a dragleave */
+.droptarget * {
+  pointer-events: none;
+}
+
+.available {
+  position: fixed;
+  top: 0;
+  right: max(0px, calc(100vw - 1200px));
+  overflow: visible;
+}
+
+.available .courses {
+  max-width: 250px;
+  max-height: 70vh;
+  overflow: scroll;
+}
+
+.course {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.course.fixed {
+  position: relative;
+}
+
+.course.fixed .name:after {
+  content: "*";
+}
+
+/* course kinds: Skills, Practical, Theory, Technical */
+.course div:first-child:before {
+  margin-right: 0.5rem;
+}
+.course.theory div:first-child:before {
+  content: "THRY";
+  color: var(--theory-color);
+}
+.course.skills div:first-child:before {
+  content: "SKLL";
+  color: var(--skills-color);
+  
+}
+.course.technical div:first-child:before {
+  content: "TECH";
+  color: var(--technical-color);
+}
+.course.practical div:first-child:before {
+  content: "PRTC";
+  color: var(--practical-color);
+}
