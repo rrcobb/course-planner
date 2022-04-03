@@ -73,27 +73,27 @@ h1, h2 {
   display: inline-block;
   width: 5em;
 }
-.course.theory div span:first-child {
+.theory .code {
   color: var(--theory-color);
 }
-.course.skills div span:first-child {
+.skills .code {
   color: var(--skills-color);
   
 }
-.course.technical div span:first-child {
+.technical .code {
   color: var(--technical-color);
 }
-.course.practical div span:first-child {
+.practical .code {
   color: var(--practical-color);
 }
 
-a.show-detail {
+a.show-detail, a.hide-detail {
   text-decoration: none;
   margin-right: 1em;
   color: hotpink;
 }
 
-a.show-detail:hover {
+a.show-detail:hover, a.hide-detail:hover {
   color: red;
   text-decoration: underline;
   text-decoration-style: dotted;

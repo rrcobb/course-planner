@@ -28,6 +28,7 @@ const AT_names_to_keys = {
   "Prep hours (FL)": "preparation_hours",
   "Prerequisites": "prerequisites",
   "Course Code (FL)": "code",
+  "prereqs": "prereqs",
 }
 
 const transformKeys = (course) => Object.fromEntries(Object.entries(course).map(([key, val]) => [AT_names_to_keys[key], val]))
@@ -196,13 +197,15 @@ function creditVocab() {
 }
 
 function renderCourse(course) {
+  let detailsUrl = new URL(document.location);
+  detailsUrl.searchParams.set('f', course.code);
   return `<div class="course ${course.kind.toLowerCase()} ${course.fixed && 'fixed'}" draggable="${course.fixed ? 'false' : 'true'}">
   <div>
     <span class="code">${course.code}</span>
     <span class="name">${course.name}</span>
   </div>
   <div>
-    <a class="show-detail" href="#"><small>details</small></a>
+    <a class="show-detail" href="${detailsUrl}"><small>details</small></a>
     <span class="credits">${credits(course)}</span>
   </div>
   </div>`
@@ -253,9 +256,29 @@ function renderMergedCourses() {
   document.querySelector('#target .info').innerHTML += renderTotalCredits(flattenedCourses(mergedCourses))
 }
 
-function showDetails() {
-  // add to url querystring
-  // show course modal
+function renderCourseDetails() {
+  // find focused course from url, if there is one
+  let f = new URL(document.location).searchParams.get('f');
+  let focusedCourse = availableCourses().find(c => c.code == f);
+  if (focusedCourse) {
+    let unfocusedUrl = new URL(document.location);
+    unfocusedUrl.searchParams.delete('f');
+    let details = `<div class="details ${course.kind.toLowerCase()}">
+      <span class="code">${course.code}</span>
+      <span>${course.name}</span>
+      <a class="hide-detail" href="${unfocusedUrl}">hide</a>
+      <div>Credits: <span class="credits">${credits(course)}</span></div>
+      <div>
+        Prerequisites: ${course.prereqs ? course.prereqs : 'None'}
+      </div>
+      <div>${course.required ? 'Required' : 'Elective'}</div>
+      <div>
+        <p>Description</p>
+        <p>${course.description}</p>
+      </div>
+    </div>`
+    document.querySelector('#target').innerHTML += details;
+  }
 }
 
 function renderAvailableCourseContainer() {
@@ -285,13 +308,14 @@ function render() {
   renderAvailableCourses();
   renderModeSwitch();
   renderLoadSample();
+  renderCourseDetails();
 }
 
 function renderLoadSample() {
   let sampleDiv = document.querySelector('.sample');
   sampleDiv.innerHTML = "<button>Load Sample</button>";
   sampleDiv.querySelector('button').addEventListener('click', e => {
-    loadSample();
+    loadSmple();
   })
 }
 
