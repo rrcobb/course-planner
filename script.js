@@ -201,7 +201,10 @@ function renderCourse(course) {
     <span class="code">${course.code}</span>
     <span class="name">${course.name}</span>
   </div>
-  <div>${credits(course)}</div>
+  <div>
+    <a class="show-detail" href="#"><small>details</small></a>
+    <span class="credits">${credits(course)}</span>
+  </div>
   </div>`
 }
 
@@ -248,6 +251,11 @@ function renderMergedCourses() {
     document.querySelector(`#year-${year} .info`).innerHTML += renderYearCredits(flattenedCourses(mergedCourses[year]))
   }
   document.querySelector('#target .info').innerHTML += renderTotalCredits(flattenedCourses(mergedCourses))
+}
+
+function showDetails() {
+  // add to url querystring
+  // show course modal
 }
 
 function renderAvailableCourseContainer() {
