@@ -197,7 +197,10 @@ function creditVocab() {
 
 function renderCourse(course) {
   return `<div class="course ${course.kind.toLowerCase()} ${course.fixed && 'fixed'}" draggable="${course.fixed ? 'false' : 'true'}">
-  <div class="name">${course.name}</div>
+  <div>
+    <span class="code">${course.code}</span>
+    <span class="name">${course.name}</span>
+  </div>
   <div>${credits(course)}</div>
   </div>`
 }

@@ -69,23 +69,20 @@ h1, h2 {
 }
 
 /* course kinds: Skills, Practical, Theory, Technical */
-.course div:first-child:before {
-  margin-right: 0.5rem;
+.course div span:first-child {
+  display: inline-block;
+  width: 5em;
 }
-.course.theory div:first-child:before {
-  content: "THRY";
+.course.theory div span:first-child {
   color: var(--theory-color);
 }
-.course.skills div:first-child:before {
-  content: "SKLL";
+.course.skills div span:first-child {
   color: var(--skills-color);
   
 }
-.course.technical div:first-child:before {
-  content: "TECH";
+.course.technical div span:first-child {
   color: var(--technical-color);
 }
-.course.practical div:first-child:before {
-  content: "PRTC";
+.course.practical div span:first-child {
   color: var(--practical-color);
 }
