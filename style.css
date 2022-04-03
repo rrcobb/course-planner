@@ -113,9 +113,11 @@ a.show-detail:hover, a.hide-detail:hover {
   position: absolute;
   top: 6em;
   background-color: rgba(255,255,255,100); /* opacity */ 
-  padding: 4em;
+  padding: 2em;
   border: 1px dotted black;
   max-width: 600px;
+  /* min of 100%vw or 600px*/
+  width: min(600px, 100%);
 }
 
 .details a.hide-detail {
@@ -124,3 +126,6 @@ a.show-detail:hover, a.hide-detail:hover {
   right: 2em;
 }
 
+.details .description {
+  margin: 1em 0;
+}

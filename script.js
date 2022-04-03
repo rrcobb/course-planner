@@ -261,23 +261,19 @@ function renderCourseDetails() {
   let f = new URL(document.location).searchParams.get('f');
   let focusedCourse = availableCourses().find(c => c.code == f);
   if (focusedCourse) {
-    console.log('focused', focusedCourse.name, focusedCourse.code);
     let unfocusedUrl = new URL(document.location);
     unfocusedUrl.searchParams.delete('f');
     let details = `<div class="details ${focusedCourse.kind.toLowerCase()}">
-      <h3>
         <span class="code">${focusedCourse.code}</span>
-        <span>${focusedCourse.name}</span>
-      </h3>
+      <h2>${focusedCourse.name}</h2>
       <a class="hide-detail" href="${unfocusedUrl}">hide</a>
-      <div>Credits: <span class="credits">${credits(focusedCourse)}</span></div>
+      <div><label for="credits"><strong>Credits:</strong></label> <span id="credits" class="credits">${credits(focusedCourse)}</span></div>
       <div>
-        Prerequisites: ${focusedCourse.prereqs ? focusedCourse.prereqs : 'None'}
+<label for="prereqs"><strong>Prerequisites:</strong></label>
+        <span class="prereqs" id="prereqs">${focusedCourse.prereqs ? focusedCourse.prereqs : 'None'}</span>
       </div>
-      <div>${focusedCourse.required ? 'Required' : 'Elective'}</div>
-      <div>
-        <p>${focusedCourse.description}</p>
-      </div>
+      <div><em>${focusedCourse.required ? 'Required' : 'Elective'}</em></div>
+      <div class="description">${focusedCourse.description}</div>
     </div>`
     document.querySelector('#target').innerHTML += details;
   }

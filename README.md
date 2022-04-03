@@ -17,28 +17,15 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 ## Features / TODO
 
 - mobile
-  - narrower sidebar (just course codes + more link?)
+  - narrower sidebar 
   - other tests to ensure conformance
+  - hide course names, just show course codes / credits / details link
 - design:
   - make courses more obviously drag/droppable
-  - course codes
   - narrower
   - fonts (use fira from other site)
 
 - Page description / About / links
-- Descriptions
-    - modal / full-width display
-    - add f=id to track courseid in url
-    - pushstate to history, so that nav works
-    - also use a back arrow to clear
-    - modal should include:
-      - course code
-      - name
-      - description
-      - prereqs
-      - credits
-      - elective or required
-      - anything else?
 - testing
   - fastcheck fuzzing
   - testing-library integration tests
