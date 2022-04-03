@@ -261,20 +261,22 @@ function renderCourseDetails() {
   let f = new URL(document.location).searchParams.get('f');
   let focusedCourse = availableCourses().find(c => c.code == f);
   if (focusedCourse) {
+    console.log('focused', focusedCourse.name, focusedCourse.code);
     let unfocusedUrl = new URL(document.location);
     unfocusedUrl.searchParams.delete('f');
-    let details = `<div class="details ${course.kind.toLowerCase()}">
-      <span class="code">${course.code}</span>
-      <span>${course.name}</span>
+    let details = `<div class="details ${focusedCourse.kind.toLowerCase()}">
+      <h3>
+        <span class="code">${focusedCourse.code}</span>
+        <span>${focusedCourse.name}</span>
+      </h3>
       <a class="hide-detail" href="${unfocusedUrl}">hide</a>
-      <div>Credits: <span class="credits">${credits(course)}</span></div>
+      <div>Credits: <span class="credits">${credits(focusedCourse)}</span></div>
       <div>
-        Prerequisites: ${course.prereqs ? course.prereqs : 'None'}
+        Prerequisites: ${focusedCourse.prereqs ? focusedCourse.prereqs : 'None'}
       </div>
-      <div>${course.required ? 'Required' : 'Elective'}</div>
+      <div>${focusedCourse.required ? 'Required' : 'Elective'}</div>
       <div>
-        <p>Description</p>
-        <p>${course.description}</p>
+        <p>${focusedCourse.description}</p>
       </div>
     </div>`
     document.querySelector('#target').innerHTML += details;
@@ -306,7 +308,7 @@ function render() {
   renderTerms();
   renderMergedCourses();
   renderAvailableCourses();
-  renderModeSwitch();
+  // renderModeSwitch();
   renderLoadSample();
   renderCourseDetails();
 }
@@ -315,7 +317,7 @@ function renderLoadSample() {
   let sampleDiv = document.querySelector('.sample');
   sampleDiv.innerHTML = "<button>Load Sample</button>";
   sampleDiv.querySelector('button').addEventListener('click', e => {
-    loadSmple();
+    loadSample();
   })
 }
 

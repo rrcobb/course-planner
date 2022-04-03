@@ -1,4 +1,14 @@
-body {
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+*, *::before, *::after { box-sizing: border-box; } * { margin: 0; } html, body { height: 100%; } body { line-height: 1.2; -webkit-font-smoothing: antialiased; } img, picture, video, canvas, svg { display: block; max-width: 100%; } input, button, textarea, select { font: inherit; } p, h1, h2, h3, h4, h5, h6 { overflow-wrap: break-word; } #root, #__next { isolation: isolate; }
+
+/*
+  Our CSS
+ */
+
+:root {
   --theory-color: green;
   --skills-color: blue;
   --technical-color: orange;
@@ -99,4 +109,18 @@ a.show-detail:hover, a.hide-detail:hover {
   text-decoration-style: dotted;
 }
 
+.details {
+  position: absolute;
+  top: 6em;
+  background-color: rgba(255,255,255,100); /* opacity */ 
+  padding: 4em;
+  border: 1px dotted black;
+  max-width: 600px;
+}
+
+.details a.hide-detail {
+  position: absolute;
+  top: 1em;
+  right: 2em;
+}
 
