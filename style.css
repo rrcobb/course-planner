@@ -24,8 +24,8 @@
 :root {
   --theory-color: green;
   --skills-color: blue;
-  --technical-color: orange;
-  --practical-color: lightskyblue;
+  --technical-color: orangered;
+  --practical-color: purple;
   --font-body: 'Fira Mono', monospace;
   --font-h1: 'Fira Mono', monospace;
   --highlight: #FFC804;
@@ -51,10 +51,12 @@ h1, h2 {
   margin-bottom: 0;
 }
 
-
-
 .about {
   max-width: max(calc(100% - 300px), 400px);
+}
+
+.term {
+  margin-top: 1em;
 }
 
 .term h3 {
@@ -80,7 +82,7 @@ h1, h2 {
 }
 
 .available .courses .credits {
-  margin-right: 0;
+  margin-right: 0.5em;
 }
 
 .courses .labels {
@@ -152,14 +154,21 @@ h3 {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0.25em 0;
+  padding: 0.25em;
+  background-color: lavender;
+  border-radius: 4px;
+  cursor: grab;
 }
 
 .course div {
   display: flex;
+  align-items: center;
 }
 
 .course.fixed {
   position: relative;
+  cursor: unset;
 }
 
 .course.fixed .name:after {
@@ -222,7 +231,7 @@ a:hover {
 }
 
 a.show-detail, a.hide-detail {
-  margin-left: 0.5em;
+  margin-right: 0.4em;
 }
 
 .help, .details {

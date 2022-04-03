@@ -338,9 +338,13 @@ function renderAbout() {
   let about = document.querySelector('.about');
   let helpLink = new URL(document.location);
   helpLink.searchParams.set('help', true)
-  about.innerHTML += `<h1>Kibo Course Planner</h1>`
+  // todo: figure out how to add the logo here but... not suck
+  about.innerHTML += `
+  <div>
+    <h1>Kibo Degree Planner</h1>
+  </div>`
   about.innerHTML += `<p><a href="${helpLink}">Help</a></p>`
-  about.innerHTML += `<p><a href="https://kibo.school">Kibo Home</a></p>`
+  about.innerHTML += `<p><a href="https://kibo.school/degree-program">Degree Home</a></p>`
 }
 
 function render() {
@@ -355,7 +359,7 @@ function render() {
   renderTerms();
   renderMergedCourses();
   renderAvailableCourses();
-  renderModeSwitch();
+  // renderModeSwitch();
   renderLoadSample();
   renderCourseDetails();
 }

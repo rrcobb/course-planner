@@ -17,11 +17,10 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 ## Features / TODO
 
 - design:
-  - make courses more obviously drag/droppable
-  - colors (accessibility, appearance)
-      - bg color for the courses themselves?
-      - fix the 'kind: Technical' color
   - spacing on the terms
+  - replace 'Year' with a program summary at the top
+
+- code colors - should match the department, or we need to explain the 'pillars'
 
 - clicking outside of details should hide overlay
 - prereq / degree checking
@@ -42,8 +41,6 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 ## TODO
 
 TODO: rendering improvements
-  * indicators for fixed vs. movable
-    * currently an asterisk for fixed
   * spacing / niceness: lay out like in ppt slide?
   * descriptions for skll, tech, thry, prtc, colors
 
