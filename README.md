@@ -17,16 +17,19 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 ## Features / TODO
 
 - design:
-  - fonts (use fira from other site)
   - make courses more obviously drag/droppable
   - colors (accessibility, appearance)
-
+      - bg color for the courses themselves?
+      - fix the 'kind: Technical' color
+  - spacing on the terms
 
 - clicking outside of details should hide overlay
 - prereq / degree checking
 - Curriculum healthcheck
+- Fix Woolf / FL toggle
+- change names to European / US for credits
+    - change only credit display, instead of courses listed?
 
-- Page description / about / links
 - testing
   - fastcheck fuzzing
   - testing-library integration tests
@@ -36,81 +39,13 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
     as a byte, so that when the course list changes, the urls still work or
     gracefully fail)
 
-### Credits
-
-Courses are currently listed for either 3 or 6 credits.
-
-Can toggle between DEAC (US Quarter Credit Hours) and Woolf (ECTS credits)
-
-~18 credits is about the target per term, but some terms end up more or less. We may revise the number of credits for some courses.
-
-### Prerequisites
-
-TODO: add info about prereqs to the course display. The `prereqs` field on a course has a string with the course names of the prerequisite courses.
-
-Expressing prereqs is sometimes hard: some are just courses, some are arbitrary strings. 
-- For Woolf, they're strings.
-- For FL, it's just other courses, so less complicated
-
-### Required and Fixed Courses
-
-Probably: 
-* make current "fixed" courses _required_ but allow them to be moved
-
-Right now, the required courses are "fixed" - they must be taken in a particular term. That helps avoid dealing with prereqs stuff, for now, but isn't really the right long-term solution.
-
-TODO: 
-- allow moving the courses, but not dropping them (or, show that a program is valid or invalid, if they aren't added)
-- check that prereqs are still met
-
-### Canonical Courses
-
-https://airtable.com/appyYlMEGQNM5FwZt/tblFyHzQkLnABd6lR/viwlzOdzoWkTdbzZI?blocks=hide
-
-This is just one view of the courses, and quickly grows outdated.
-
-### Sample Programs
-
-Currently, there's one sample degree for the FL / DEAC program.
-
-TODO: 
-
-* add more sample programs, as we add more courses
-* create 'specializations' that pre-select courses
-* effectively "templates" for planning the degree
-
-E.g. what does it look like to specialize in "Data Science" or in "App Development" or in "Systems Programming".
-
-# Features
-
-## Saving course urls
-
-When you make a change, the url updates with a representation of the currently selected set of courses. If you load that url, it will reload with that set of courses. That means you can share the url, and someone else can see the same course plan that you built.
-
-I think this feature is neat, because it uses some cool features in JavaScript: Uint8Array, base64 encoding with btoa and atob, run-length encoding, and bit-packing. It only works so long as there are fewer than 16 terms :D, and it is only small given that there are lots of 'runs' of courses (that's the run-length encoding part). It should nearly-always be less than the total number of courses offered, in bytes, which is pretty cool.
-
-For the urls to continue to work, the _order of the courses in 'airtableCourses' is significant_. This is a bit of a weird constraint, and it's just how the serialization to url is written right now. Since I am literally the only person using this right now, it's okay, but eventually, this has to be fixed. Adding ids to the courses in airtable, increment-only there, exporting with that field, and sorting the data before serialization / deserialization would do the trick.
-
 ## TODO
-
-TODO:  Course display improvements
-- show course codes
-- show description
-- show LOs
-- make 'required' something other than an asterisk
-- show prerequisites
 
 TODO: rendering improvements
   * indicators for fixed vs. movable
     * currently an asterisk for fixed
-  * click expand for course description - modal
-  * (we have lots of course info now...)
   * spacing / niceness: lay out like in ppt slide?
   * descriptions for skll, tech, thry, prtc, colors
-  * kind, course name, course code, credits: column labels
-
-
-Some kind of 'expand' view, with the current course's description, as a floating panel? how'd that be on mobile?
 
 ## Validation
 
@@ -147,6 +82,53 @@ TODO: account for different starts, drops / fails
 
 TODO: export merged courses?
 TODO: search for courses / filter by prerequisites
+
+# Notes
+## Credits
+
+Courses are currently listed for either 3 or 6 credits.
+
+Can toggle between DEAC (US Quarter Credit Hours) and Woolf (ECTS credits)
+
+~18 credits is about the target per term, but some terms end up more or less. We may revise the number of credits for some courses.
+
+### Prerequisites
+
+Expressing prereqs is sometimes hard: some are just courses, some are arbitrary strings. 
+- For Woolf, they're strings.
+- For FL, it's just other courses, so less complicated
+
+### Required and Fixed Courses
+
+Right now, the required courses are "fixed" - they must be taken in a particular term. 
+
+### Canonical Courses
+
+https://airtable.com/appyYlMEGQNM5FwZt/tblFyHzQkLnABd6lR/viwlzOdzoWkTdbzZI?blocks=hide
+
+This is just one view of the courses, and quickly grows outdated.
+
+### Sample Programs
+
+Currently, there's one sample degree for the FL / DEAC program.
+
+TODO: 
+
+* add more sample programs, as we add more courses
+* create 'specializations' that pre-select courses
+* effectively "templates" for planning the degree
+
+E.g. what does it look like to specialize in "Data Science" or in "App Development" or in "Systems Programming".
+
+# Features
+
+## Saving course urls
+
+When you make a change, the url updates with a representation of the currently selected set of courses. If you load that url, it will reload with that set of courses. That means you can share the url, and someone else can see the same course plan that you built.
+
+I think this feature is neat, because it uses some cool features in JavaScript: Uint8Array, base64 encoding with btoa and atob, run-length encoding, and bit-packing. It only works so long as there are fewer than 16 terms :D, and it is only small given that there are lots of 'runs' of courses (that's the run-length encoding part). It should nearly-always be less than the total number of courses offered, in bytes, which is pretty cool.
+
+For the urls to continue to work, the _order of the courses in 'airtableCourses' is significant_. This is a bit of a weird constraint, and it's just how the serialization to url is written right now. Since I am literally the only person using this right now, it's okay, but eventually, this has to be fixed. Adding ids to the courses in airtable, increment-only there, exporting with that field, and sorting the data before serialization / deserialization would do the trick.
 
 ## Drag and drop
 
