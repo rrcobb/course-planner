@@ -16,20 +16,20 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 
 ## Features / TODO
 
-- mobile
-  - other tests to ensure conformance
 - design:
-  - make courses more obviously drag/droppable
-  - narrower
   - fonts (use fira from other site)
+  - make courses more obviously drag/droppable
+  - colors (accessibility, appearance)
 
-- Page description / About / links
+
+- clicking outside of details should hide overlay
+- prereq / degree checking
+- Curriculum healthcheck
+
+- Page description / about / links
 - testing
   - fastcheck fuzzing
   - testing-library integration tests
-- prereq / degree checking
-- Colors
-- Curriculum healthcheck
 - Degree 'offramps' after 1 year (term 4), 2 years (term 8)
     - choose target from dropdown?
 - Versioning the course list in the saved urls (e.g. Woolf '21, FL '22, saved

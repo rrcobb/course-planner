@@ -8,14 +8,38 @@
   Our CSS
  */
 
+@font-face {
+  font-family: 'Fira Mono';
+  src: url('fonts/FiraMono-Regular.woff2') format('woff2');
+  font-display: optional;
+}
+
+@font-face {
+  font-family: 'Fira Mono';
+  src: url('fonts/FiraMono-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: optional;
+}
+
 :root {
   --theory-color: green;
   --skills-color: blue;
   --technical-color: orange;
   --practical-color: lightskyblue;
+  --font-body: 'Fira Mono', monospace;
+  --font-h1: 'Fira Mono', monospace;
+  --highlight: #FFC804;
+  --text-emphasis-color: #4522A9;
+  --body-text: #262626;
+  --bg-color: #F6F6F6;
 }
 
-
+body {
+  background-color: var(--bg-color);
+  font-family: var(--font-body);
+  color: var(--body-text);
+  font-size: 16px;
+}
 
 #target {
   max-width: 900px;
@@ -27,12 +51,19 @@ h1, h2 {
   margin-bottom: 0;
 }
 
+
+
+.about {
+  max-width: max(calc(100% - 300px), 400px);
+}
+
 .term h3 {
   margin-bottom: 0;
 }
 
 .info {
   margin-bottom: 0.5rem;
+  font-size: 14px;
 }
 
 .courses {
@@ -45,11 +76,11 @@ h1, h2 {
 }
 
 .courses .credits {
-  margin-right: 3.5em;
+  margin-right: 2em;
 }
 
 .available .courses .credits {
-  margin-right: 0.5em;
+  margin-right: 0;
 }
 
 .courses .labels {
@@ -66,20 +97,16 @@ h1, h2 {
 
 .labels .code-label {
   display: inline-block;
-  width: 4.2em;
+  width: 4em;
 }
 
 .labels .credits-label {
   display: inline-block;
-  margin-right: 3em;
+  margin-right: 4em;
 }
 
 .available .labels .code-label {
-  width: 3.4em;
-}
-
-.available .labels .credits-label {
-  margin-right: 0.5em;
+  width: 3em;
 }
 
 .droptarget .courses {
@@ -93,9 +120,17 @@ h1, h2 {
 
 .available {
   position: fixed;
-  top: 0;
+  top: 8em;
   right: max(0px, calc(100vw - 1200px));
   overflow: visible;
+}
+
+h2 {
+  font-size: 18px;
+}
+
+h3 {
+  font-size: 16px;
 }
 
 .available .courses {
@@ -107,6 +142,10 @@ h1, h2 {
 .available .course .code {
   width: 4em;
   flex-shrink: 0;
+}
+
+.available .labels .credits-label {
+  margin-right: 2em;
 }
 
 .course {
@@ -126,7 +165,6 @@ h1, h2 {
 .course.fixed .name:after {
   content: "*";
 }
-
 
 /* mobile
  *
@@ -150,16 +188,13 @@ h1, h2 {
   .term .courses {
     max-width: calc(100% - 200px);
   }
-
-  .available {
-    top: 4em;
-  }
 }
 
 /* course kinds: Skills, Practical, Theory, Technical */
 .course .code {
   display: inline-block;
   width: 5em;
+  flex-shrink: 0;
 }
 .theory .code {
   color: var(--theory-color);
@@ -175,30 +210,41 @@ h1, h2 {
   color: var(--practical-color);
 }
 
-a.show-detail, a.hide-detail {
+a {
+  color: var(--text-emphasis-color);
   text-decoration: none;
-  margin-left: 0.5em;
-  color: hotpink;
 }
 
-a.show-detail:hover, a.hide-detail:hover {
-  color: red;
+a:hover {
+  opacity: 50%;
   text-decoration: underline;
   text-decoration-style: dotted;
 }
 
-.details {
+a.show-detail, a.hide-detail {
+  margin-left: 0.5em;
+}
+
+.help, .details {
   position: absolute;
-  top: 6em;
   background-color: rgba(255,255,255,100); /* opacity */ 
   padding: 2em;
   border: 1px dotted black;
   max-width: 600px;
   /* min of 100%vw or 600px*/
   width: min(600px, 100%);
+  top: 6em;
 }
 
-.details a.hide-detail {
+.help {
+  z-index: 2;
+}
+
+.help p {
+  margin: 1em 0;
+}
+
+.details a.hide-detail, .help a.hide-detail {
   position: absolute;
   top: 1em;
   right: 2em;

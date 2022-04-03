@@ -214,7 +214,7 @@ function renderCourse(course) {
   </div>
   <div>
     <span class="credits">${credits(course)}</span>
-    <a class="show-detail" href="${detailsUrl}"><small>details</small></a>
+    <a class="show-detail" href="${detailsUrl}"><small>show</small></a>
   </div>
   </div>`
 }
@@ -312,17 +312,50 @@ function renderAvailableCourses() {
   }
 }
 
+function renderHelp() {
+  // find help from url, if present
+  let helpActive = new URL(document.location).searchParams.get('help');
+  if (helpActive) {
+    let unfocusedUrl = new URL(document.location);
+    unfocusedUrl.searchParams.delete('help');
+    let help = `
+  <div class="help">
+    <a class="hide-detail" href="${unfocusedUrl}">hide</a>
+    <p>Use this tool to chart your course through Kibo's <a href="https://kibo.school/degree-program">3-year BSc in Computer Science</a>.</p>
+    <p>Drag and drop courses from the available courses to each term to plan your degree.</p>
+    <ul>
+    <li>Click 'show' to see a course's description and prereqs.</li>
+    <li>Save or share the url. Your progress automatically updates in the address bar.</li>
+    <li>Click 'Load Sample' to load a sample degree plan.</li>
+  </ul>
+  <p>Courses with a '*' are required courses. You can't move them.</p>
+</div>`
+    document.querySelector('#target').innerHTML += help;
+  }
+}
+
+function renderAbout() {
+  let about = document.querySelector('.about');
+  let helpLink = new URL(document.location);
+  helpLink.searchParams.set('help', true)
+  about.innerHTML += `<h1>Kibo Course Planner</h1>`
+  about.innerHTML += `<p><a href="${helpLink}">Help</a></p>`
+  about.innerHTML += `<p><a href="https://kibo.school">Kibo Home</a></p>`
+}
+
 function render() {
   let target = document.querySelector("#target");
   target.innerHTML = "";
-  target.innerHTML += "<h1>Kibo Course Planner</h1>"
+  target.innerHTML += "<div class='about'></div>"
   target.innerHTML += "<div class='mode'></div>"
   target.innerHTML += "<div class='sample'></div>"
   target.innerHTML += "<div class='info'></div>"
+  renderAbout();
+  renderHelp();
   renderTerms();
   renderMergedCourses();
   renderAvailableCourses();
-  // renderModeSwitch();
+  renderModeSwitch();
   renderLoadSample();
   renderCourseDetails();
 }
@@ -337,9 +370,9 @@ function renderLoadSample() {
 
 function loadSample() {
   let sample = samplePrograms(mode)
-  .map(course => transformKeys(course))
-  .filter(course => !getRequired()
-    .some(c => c.name == course.name)
+    .map(course => transformKeys(course))
+    .filter(course => !getRequired()
+      .some(c => c.name == course.name)
     );
   chosenCourses = groupIntoYears(sample);
   render()
