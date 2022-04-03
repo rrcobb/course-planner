@@ -16,8 +16,34 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 
 ## Features / TODO
 
+- mobile
+  - narrower sidebar (just course codes + more link?)
+  - other tests to ensure conformance
+- design:
+  - make courses more obviously drag/droppable
+  - course codes
+  - narrower
+  - fonts (use fira from other site)
+
+- Page description / About / links
+- Descriptions
+    - modal / full-width display
+    - add f=id to track courseid in url
+    - pushstate to history, so that nav works
+    - also use a back arrow to clear
+    - modal should include:
+      - course code
+      - name
+      - description
+      - prereqs
+      - credits
+      - elective or required
+      - anything else?
+- testing
+  - fastcheck fuzzing
+  - testing-library integration tests
+- prereq / degree checking
 - Colors
-- Descriptions, prereqs
 - Curriculum healthcheck
 - Degree 'offramps' after 1 year (term 4), 2 years (term 8)
     - choose target from dropdown?
