@@ -17,9 +17,7 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 ## Features / TODO
 
 - mobile
-  - narrower sidebar 
   - other tests to ensure conformance
-  - hide course names, just show course codes / credits / details link
 - design:
   - make courses more obviously drag/droppable
   - narrower

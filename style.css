@@ -15,6 +15,8 @@
   --practical-color: lightskyblue;
 }
 
+
+
 #target {
   max-width: 900px;
   margin: auto;
@@ -42,6 +44,44 @@ h1, h2 {
   max-width: calc(100% - 300px);
 }
 
+.courses .credits {
+  margin-right: 3.5em;
+}
+
+.available .courses .credits {
+  margin-right: 0.5em;
+}
+
+.courses .labels {
+  display: flex;
+  justify-content: space-between;
+  margin-top: -0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.labels span {
+  font-variant: small-caps;
+  font-size: 18px;
+}
+
+.labels .code-label {
+  display: inline-block;
+  width: 4.2em;
+}
+
+.labels .credits-label {
+  display: inline-block;
+  margin-right: 3em;
+}
+
+.available .labels .code-label {
+  width: 3.4em;
+}
+
+.available .labels .credits-label {
+  margin-right: 0.5em;
+}
+
 .droptarget .courses {
   background-color: honeydew;
 }
@@ -59,15 +99,24 @@ h1, h2 {
 }
 
 .available .courses {
-  max-width: 250px;
+  max-width: 300px;
   max-height: 70vh;
   overflow: scroll;
+}
+
+.available .course .code {
+  width: 4em;
+  flex-shrink: 0;
 }
 
 .course {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+}
+
+.course div {
+  display: flex;
 }
 
 .course.fixed {
@@ -78,8 +127,37 @@ h1, h2 {
   content: "*";
 }
 
+
+/* mobile
+ *
+ * - hide course names to save space
+ * - fix width calculations
+ * - add top to available, to not intersect with title
+*/
+@media only screen and (max-width: 600px) {
+  .course .name, .labels .name-label {
+    display: none;
+  }
+  
+  .labels .credits-label {
+    margin-right: 4em;
+  }
+
+  .courses .credits {
+    margin-right: 2em;
+  }
+
+  .term .courses {
+    max-width: calc(100% - 200px);
+  }
+
+  .available {
+    top: 4em;
+  }
+}
+
 /* course kinds: Skills, Practical, Theory, Technical */
-.course div span:first-child {
+.course .code {
   display: inline-block;
   width: 5em;
 }
@@ -99,7 +177,7 @@ h1, h2 {
 
 a.show-detail, a.hide-detail {
   text-decoration: none;
-  margin-right: 1em;
+  margin-left: 0.5em;
   color: hotpink;
 }
 
@@ -129,3 +207,5 @@ a.show-detail:hover, a.hide-detail:hover {
 .details .description {
   margin: 1em 0;
 }
+
+

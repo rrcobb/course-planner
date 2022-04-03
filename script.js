@@ -169,7 +169,15 @@ function renderTerm(term) {
   return `<div class="term" id="term-${term.year}-${term.term}" data-year="${term.year}" data-term="${term.term}">
     <h3>Term ${term.term} (Year ${term.year})</h3>
     <div class="info"></div>
-    <div class="courses"></div>
+    <div class="courses">
+      <div class="labels">
+        <div>
+          <span class="code-label">code</span>
+          <span class="name-label">name</span>
+        </div>
+        <span class="credits-label">credits</span>
+      </div>
+    </div>
   </div>`
 }
 
@@ -205,8 +213,8 @@ function renderCourse(course) {
     <span class="name">${course.name}</span>
   </div>
   <div>
-    <a class="show-detail" href="${detailsUrl}"><small>details</small></a>
     <span class="credits">${credits(course)}</span>
+    <a class="show-detail" href="${detailsUrl}"><small>details</small></a>
   </div>
   </div>`
 }
@@ -280,7 +288,17 @@ function renderCourseDetails() {
 }
 
 function renderAvailableCourseContainer() {
-  return `<div class="available"><h2>Available Courses</h2><div class="courses"></div></div>`
+  return `<div class="available"><h2>Available Courses</h2>
+    <div class="courses">
+      <div class="labels">
+        <div>
+          <span class="code-label">code</span>
+          <span class="name-label">name</span>
+        </div>
+        <span class="credits-label">credits</span>
+      </div>
+    </div>
+    </div>`
 }
 
 function renderAvailableCourses() {
