@@ -25,9 +25,10 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 - clicking outside of details should hide overlay
 - prereq / degree checking
 - Curriculum healthcheck
-- Fix Woolf / FL toggle
+- Fix Woolf / FL toggle (or remove Woolf)
 - change names to European / US for credits
     - change only credit display, instead of courses listed?
+    - display both european + US credit equivalents
 
 - testing
   - fastcheck fuzzing
@@ -43,6 +44,7 @@ Right now, a ton of the code is relying on unique course names to work; it'd pro
 TODO: rendering improvements
   * spacing / niceness: lay out like in ppt slide?
   * descriptions for skll, tech, thry, prtc, colors
+  * rendering on wide screens
 
 ## Validation
 
@@ -87,13 +89,16 @@ Courses are currently listed for either 3 or 6 credits.
 
 Can toggle between DEAC (US Quarter Credit Hours) and Woolf (ECTS credits)
 
-~18 credits is about the target per term, but some terms end up more or less. We may revise the number of credits for some courses.
+~16 credits is about the target per term, but some terms end up more or less. We may revise the number of credits for some courses.
 
 ### Prerequisites
 
 Expressing prereqs is sometimes hard: some are just courses, some are arbitrary strings. 
 - For Woolf, they're strings.
 - For FL, it's just other courses, so less complicated
+
+The record ids for prerequisites are in an array (prerequisites) and there's a
+'prereqs' string with the course titles... we could use them somehow
 
 ### Required and Fixed Courses
 
@@ -104,6 +109,21 @@ Right now, the required courses are "fixed" - they must be taken in a particular
 https://airtable.com/appyYlMEGQNM5FwZt/tblFyHzQkLnABd6lR/viwlzOdzoWkTdbzZI?blocks=hide
 
 This is just one view of the courses, and quickly grows outdated.
+
+To update the courses
+
+1. Go to https://airtable.com/appyYlMEGQNM5FwZt/api/docs#curl/table:courses:list
+2. Turn on the api key toggle and click to the curl version
+3. copy the curl version with the `-H Authorization` header
+4. modify the command to add the fields below
+
+```
+&fields=Name&fields=Required&fields=Kind&fields=Type&fields=FL&fields=Description&fields=Woolf&fields=prereqs&fields=Sample%20Degree&fields=Quarter%20%28Woolf%20plan%29&fields=Quarter%20%28sample%202%29&fields=Credit%20Hours&fields=ECTS%20Credits&fields=Course%20Code%20%28FL%29&fields=Prerequisites%20%28FL%29
+```
+
+5. curl the records to a file called `download.json` 
+6. convert the downloaded files to a json array, `node convert.js`
+7. copy that array, replace the variable assignment in `airtableCourses.js`
 
 ### Sample Programs
 
