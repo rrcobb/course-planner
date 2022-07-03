@@ -8,20 +8,26 @@
 // use one byte for every two courses
 // we're just smashing the term for every course into a big arraybuffer
 // 
-// also, restore the active selection of courses from an arraybuffer, formatted the same way
-// the inverse of the thing we did
+// also, the inverse of that
+// restore the active selection of courses from an arraybuffer, formatted the same way
+//
+// the courses are sorted by code first either way
+const SORTED_COURSE_CODES = AIRTABLE_COURSES
+  .map(c => c['Course Code (FL)'])
+  .sort()
 
+// take the currently selected courses and turn them into an arraybuffer
 function coursePlanAsArrayBuffer() {
-  // for each course in the airtableCourses
+  // for each course in the AIRTABLE_COURSES
   // what's the term in the current plan?
   let plan = mergeCourses();
-  let res = new Array(airtableCourses.length);
+  let res = new Array(AIRTABLE_COURSES.length);
   // 0 means no term
   res.fill(0);
   for (let year in plan) {
     for (let term in plan[year]) {
       for (let course of plan[year][term]) {
-        let i = airtableCourses.findIndex(c => c.Name == course.name)
+        let i = SORTED_COURSE_CODES.findIndex(c => c == course.code)
         res[i] = parseInt(term) + (parseInt(year) - 1) * 4;
       }
     }
@@ -67,7 +73,9 @@ function restorePlanFromUrl() {
       let year = Math.ceil(term / 4);
       term = term % 4;
       term = term == 0 ? 4 : term;
-      let course = transformKeys(airtableCourses[courseindex]);
+      let courseCode = SORTED_COURSE_CODES[courseindex];
+      let course = AIRTABLE_COURSES.find(c => c['Course Code (FL)'] == courseCode)
+      course = transformKeys(course);
       if (!course.required) {
         chosenCourses[year][term].push(course)
       }
