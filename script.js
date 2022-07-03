@@ -301,7 +301,7 @@ function renderHelp() {
     let help = `
   <div class="help">
     <a class="hide-detail" href="${unfocusedUrl}">hide</a>
-    <p>Use this tool to chart your course through Kibo's <a href="https://kibo.school/degree-program">3-year BSc in Computer Science</a>.</p>
+    <p>Use this tool to chart your course through Kibo's <a href="https://kibo.school/degree">3-year BSc in Computer Science</a>.</p>
     <p>Drag and drop courses from the available courses to each term to plan your degree.</p>
     <ul>
     <li>Click 'show' to see a course's description and prereqs.</li>
